@@ -36,7 +36,7 @@ describe UsersController do
 	
 	it "should have the right URL" do
 	  get :show, :id => @user
-	  response.should have_selector('td>a", :content => user_path(@user),
+	  response.should have_selector('td>a', :content => user_path(@user), 
 	    :href => user_path(@user))
 	end
 	
@@ -44,7 +44,7 @@ describe UsersController do
 	
 
   describe "GET 'new'" do
-      it "returns http success" do
+      it "should be successful" do
         get :new
         response.should be_success
       end
