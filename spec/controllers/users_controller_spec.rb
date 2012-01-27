@@ -54,5 +54,36 @@ describe UsersController do
         response.should have_selector('title', :content => "SIGN UP")
 	  end
   end
+  
+  descrite "POST 'create'" do
+   
+    descrite "failure" do
+	
+      before(:each) do
+	    @attr = { :name => "", :email => "", 
+		  :password => "",
+		  :password_confirmation => "" }
+	  end
+	  
+	  it "should have the right title" do
+	    post :create, :user => @attr
+		response.should have_selector('title', :content => "SIGN UP")
+	  end
+	  
+	  it "should render the 'new' page"  do
+	    post :create, :user => @attr
+		response.should render_template('new')
+	  end
+	  
+	  it "should not create a user"  do
+	    lambda do
+	    post :create, :user => @attr		  
+		end.should_not change(User, :cound)
+ 
+	  end
+	  
+	end
+  end
+
 
 end
