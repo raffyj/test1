@@ -11,7 +11,7 @@ Test1::Application.routes.draw do
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
   match '/signup', :to => 'users#new'  
-  match '/sigin', :to => 'sessions#new'  
+  match '/signin', :to => 'sessions#new'  
   match '/sigout', :to => 'sessions#destry'
   
   # get "pages/home"
