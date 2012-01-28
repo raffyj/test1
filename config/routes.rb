@@ -1,12 +1,18 @@
 Test1::Application.routes.draw do
 
+  #get "sessions/new" # handled by resoursces: sessions
+
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
+  
   #get "users/new" -not needed coz of resources :users
 
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
   match '/signup', :to => 'users#new'  
+  match '/sigin', :to => 'sessions#new'  
+  match '/sigout', :to => 'sessions#destry'
   
   # get "pages/home"
   # get "pages/contact"
