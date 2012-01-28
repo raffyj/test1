@@ -12,7 +12,7 @@ Test1::Application.routes.draw do
   match '/help', :to => 'pages#help'
   match '/signup', :to => 'users#new'  
   match '/signin', :to => 'sessions#new'  
-  match '/sigout', :to => 'sessions#destry'
+  match '/signout', :to => 'sessions#destry'
   
   # get "pages/home"
   # get "pages/contact"
