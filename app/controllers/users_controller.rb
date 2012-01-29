@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  before_filter :authenticate, :only => [:edit, :update]
   
   def show
     @user = User.find(params[:id])
@@ -26,6 +28,8 @@ class UsersController < ApplicationController
 	end
   
   def edit
+  
+  
     @user = User.find(params[:id])
     @title = "Edit user"
   end
@@ -38,6 +42,13 @@ class UsersController < ApplicationController
 	  @title = "Edit user"
       render 'edit'
 	end
+  end
+  
+  private
+  
+  def authenticate
+    # flash[:notice] = "please sign in to access this page."
+    deny_acess unless signed_in?
   end
   
 end
