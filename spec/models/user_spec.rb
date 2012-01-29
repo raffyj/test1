@@ -139,25 +139,45 @@ describe User do
 
     describe "authenticate method" do
 	
-	  it "should exist " do
-	    User.should respond_to(:authenticate)
-	  end
+			it "should exist " do
+				User.should respond_to(:authenticate)
+			end
+			
+			it "should return nil on email/password mismatch" do
+				User.authenticate(@attr[:email], "wrongpass").should be_nil
+			end
+			
+			it "should return nil for an email address with no user" do
+				User.authenticate("bar@foo.com", @attr[:password]).should be_nil
+			end
+			
+			it "should return the user an email/password match" do
+				User.authenticate(@attr[:email], @attr[:password]).should == @user
+			end
 	  
-	  it "should return nil on email/password mismatch" do
-	    User.authenticate(@attr[:email], "wrongpass").should be_nil
-	  end
-	  
-	  it "should return nil for an email address with no user" do
-	    User.authenticate("bar@foo.com", @attr[:password]).should be_nil
-	  end
-	  
-	  it "should return the user an email/password match" do
-	    User.authenticate(@attr[:email], @attr[:password]).should == @user
-	  end
-	  
-	end
+		end
 	
   end
+	
+	describe "admin attribute" do
+	
+		before(:each) do
+			@user = User.new(@attr)
+		end
+		
+		it "should repond to amin" do
+			@user.should respond_to(:admin)
+		end
+		
+		it "should not be admin by default" do
+			@user.should_not be_admin
+		end
+		
+		it "should be convertible to an admin" do
+			@user.toggle!(:admin)
+			@user.should be_admin
+		end
+	end
   
 end # describe User do
 
@@ -172,5 +192,6 @@ end # describe User do
 #  updated_at         :datetime
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean         default(FALSE)
 #
 

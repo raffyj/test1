@@ -2,7 +2,7 @@
 class User < ActiveRecord::Base
   attr_accessor :password
   # attr_accessor :salt
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation #, :admin
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i  
   
@@ -70,5 +70,6 @@ end # end class user
 #  updated_at         :datetime
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean         default(FALSE)
 #
 
